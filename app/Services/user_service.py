@@ -15,4 +15,4 @@ async def get_user_id(id: int):
     async with httpx.AsyncClient() as client:
         response = await client.get(f"{JSON_placeholder}/users/{id}")
         response.raise_for_status()
-        return response.json()
+        return response.json()  
