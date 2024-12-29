@@ -15,4 +15,19 @@ async def get_user_id(id: int):
     async with httpx.AsyncClient() as client:
         response = await client.get(f"{JSON_placeholder}/users/{id}")
         response.raise_for_status()
-        return response.json()  
+        return response.json()
+    
+async def get_posts_user(id: int):
+    """
+    Obtiene los posts desde JSON_placeholder.
+
+    Returns:
+        dict: Datos de los posts en formato JSON.
+    """
+    async with httpx.AsyncClient() as client:
+        response = await client.get(f"{JSON_placeholder}/posts")
+        response.raise_for_status()
+        posts = response.json()
+        #Filtrar por usuarios
+        user_posts = [post for post in posts if post["userId"] == id]   
+        return user_posts
