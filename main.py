@@ -1,18 +1,19 @@
 from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
-from app import routes
+import logging
+from app.routers.user_routes import router
 
-app = FastAPI(
-    title="test",
-    docs_url="/api/v1/docs",
-    redoc_url="/api/v1/redoc"
+logging.basicConfig(
+   level=logging.INFO,
+   format='%(asctime)s - %(threadName)s - %(processName)s - %(levelname)s - %(message)s',
+   filename='app.log',
+    filemode='a'
 )
+logger = logging.getLogger(__name__)
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=False,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-routes.incluide_routes(app)
+app = FastAPI(title="JSONPlaceholder API Integration")
+
+app.include_router(router)
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
