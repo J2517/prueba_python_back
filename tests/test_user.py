@@ -11,7 +11,6 @@ def user_service():
     """Fixture crea una instancia de UserService"""
     return UserService()
 
-# Tests for UserState
 def test_singleton_pattern():
     """Test comprobar que ambas referencias apuntan al mismo objeto"""
     instance1 = UserState()
@@ -68,7 +67,7 @@ async def test_get_posts_success(user_service):
 
 @pytest.mark.asyncio
 async def test_get_posts_http_error(user_service):
-    """Test posts retrieval with HTTP error"""
+    """Test para obtener posts con error"""
     test_user = {"id": 1, "name": "Test User"}
     user_service.user_state.set_last_user(1, test_user)
     

@@ -14,14 +14,13 @@ Este proyecto es una integración con la API pública de JSONPlaceholder, que of
 
 *3. Arquitectura*
 
-API REST simplificada ya que no se hizo uso de modelos dada la simplicidad del ejercicio.
-
+API REST simplificada, diseñada como una solución ligera para cumplir con los requerimientos básicos del ejercicio. 
 
 *4. Respuesta a requerimientos*
 * Un endpoint */users/{id}*:
 Se realizó un método asíncorono llamado *get_user* que obtiene la información de un usuario. El método recibe un parámetro *user_id*, realiza una solicitud GET al endpoint correspondiente de la API para obtener los datos del usuario. Si la solicitud es exitosa, se almacena la información obtenida a través del método *set_last_user*, y se retorna un diccionario que incluye la fecha y hora actual junto con los datos del usuario.
 * Un endpoint */posts*:
-Se realizó un método asíncrono llamado *get_posts* tiene como objetivo obtener las publicaciones asociadas al último usuario consultado. Primero, verifica si existe un usuario previamente consultado mediante la función *has_user de user_state*; si no es así, lanza una excepción que indica que se debe consultar primero un usuario a través del endpoint */users/{id}*. Si se encuentra un usuario, se obtiene su ID y se realiza una solicitud GET a la API para obtener las publicaciones de ese usuario. Si la respuesta es exitosa, se retorna un diccionario que incluye la fecha y hora actual, el id del usuario consultado, las publicaciones y el conteo de éstas.
+Se realizó un método asíncrono llamado *get_posts* que tiene como objetivo obtener las publicaciones asociadas al último usuario consultado. Primero, verifica si existe un usuario previamente consultado mediante la función *has_user* de *user_state*; si no es así, lanza una excepción que indica que se debe consultar primero un usuario a través del endpoint */users/{id}*. Si se encuentra un usuario, se obtiene su ID y se realiza una solicitud GET a la API para obtener las publicaciones de ese usuario. Si la respuesta es exitosa, se retorna un diccionario que incluye la fecha y hora actual, el id del usuario consultado, las publicaciones y el conteo de éstas.
 * Fecha y hora
 Se realizó un método asíncrono llamado *get_current_datetime* que tiliza la función datetime.now() para obtener la fecha y hora del sistema en el momento de la ejecución, y luego utiliza el método strftime para formatear la fecha y hora en el formato deseado.
 * Logs
@@ -32,9 +31,5 @@ Se estableció una configuración global en *main.py* que proporciona la configu
 * Inicie el servidor con el comando *uvicorn main:app --reload*
 * Ingrese al enlace *http://127.0.0.1:8000/docs*
 
-*6. Enlaces de apoyo*
-
-* API: https://jsonplaceholder.typicode.com
-* Documentación de FastAPI: https://fastapi.tiangolo.com/tutorial
-* Canal de Youtube en español de "codigofacilito": https://www.youtube.com/@codigofacilito
-* Adicionalmente se realizaron consultas a herramientas de AI como lo son: ChatGPT y Claude
+*6. Como realizar las pruebas
+* Utilice el comando *python -m pytest*
